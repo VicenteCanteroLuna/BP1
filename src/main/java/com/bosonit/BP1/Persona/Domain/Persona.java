@@ -41,6 +41,8 @@ public class Persona {
 
 
     public Persona(PersonaInputDTO persona){
+        if (persona == null)
+            return;
     setId_persona(persona.getId_persona());
     setUsuario(persona.getUsuario());
     setPassword(persona.getPassword());

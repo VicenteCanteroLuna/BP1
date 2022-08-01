@@ -9,7 +9,7 @@ import java.util.Date;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class AsignaturasInputDto {
+public class AsignaturaInputDto {
 
     String asignatura;
 

@@ -13,6 +13,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -54,8 +55,10 @@ public class Student {
                 '}';
     }
 
-    @OneToMany
-    List<Asignaturas> estudios;
+
+    @OneToMany(fetch = FetchType.LAZY)
+    @JoinColumn(name = "estudios")
+    private List<Asignaturas> estudios = new ArrayList<>();
 
 
     public void ValidadorEstudiante() throws Exception{
@@ -99,7 +102,17 @@ public class Student {
         studentOutputDtoFull.setBranch(this.getBranch());
         studentOutputDtoFull.setComents(this.getComents());
         studentOutputDtoFull.setNum_hours_week(this.getNum_hours_week());
-        studentOutputDtoFull.setPersona(this.getPersona());
+
+        studentOutputDtoFull.setUsuario(this.persona.getUsuario());
+        studentOutputDtoFull.setPassword(this.persona.getPassword());
+        studentOutputDtoFull.setName(this.persona.getName());
+        studentOutputDtoFull.setSurname(this.persona.getSurname());
+        studentOutputDtoFull.setCompany_email(this.persona.getCompany_email());
+        studentOutputDtoFull.setPersonal_email(this.persona.getPersonal_email());
+        studentOutputDtoFull.setCity(this.persona.getCity());
+        studentOutputDtoFull.setCreated_date(this.persona.getCreated_date());
+        studentOutputDtoFull.setImagen_url(this.persona.getImagen_url());
+        studentOutputDtoFull.setTermination_date(this.persona.getTermination_date());
 
         return studentOutputDtoFull;
     }

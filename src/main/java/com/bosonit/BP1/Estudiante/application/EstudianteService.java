@@ -1,5 +1,6 @@
 package com.bosonit.BP1.Estudiante.application;
 
+import com.bosonit.BP1.Asignaturas.infrastructure.controller.dto.AsignaturaOutputDto;
 import com.bosonit.BP1.Estudiante.infrastructure.controller.dto.StudentInputDto;
 import com.bosonit.BP1.Estudiante.infrastructure.controller.dto.StudentOutputDtoFull;
 import com.bosonit.BP1.Estudiante.infrastructure.controller.dto.StudentOutputDtoSimple;
@@ -19,4 +20,7 @@ public interface EstudianteService {
     List<StudentOutputDtoFull> getAllStudent();
 
     StudentOutputDtoFull actualizaEstudiante(int id, StudentInputDto studentInputDto);
+
+
+    List<AsignaturaOutputDto> asignaturasEstudiante(int idEstudiante);
 }

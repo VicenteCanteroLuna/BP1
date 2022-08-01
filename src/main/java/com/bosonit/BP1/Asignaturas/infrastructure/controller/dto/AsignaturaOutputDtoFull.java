@@ -7,22 +7,17 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import javax.persistence.CascadeType;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import java.util.Date;
-
 
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class AsignaturasOutputDtoFull extends AsignaturaOutputDto{
+public class AsignaturaOutputDtoFull extends AsignaturaOutputDto{
 
     private Profesor profesor;
 
     private Student student;
 
-    public AsignaturasOutputDtoFull (Asignaturas asignaturas){
+    public AsignaturaOutputDtoFull(Asignaturas asignaturas){
         setProfesor(asignaturas.getProfesor());
         setStudent(asignaturas.getStudent());
 

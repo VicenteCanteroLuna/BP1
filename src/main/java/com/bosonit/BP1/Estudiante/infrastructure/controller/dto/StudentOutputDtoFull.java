@@ -28,11 +28,11 @@ public class StudentOutputDtoFull extends StudentOutputDtoSimple{
     private Date termination_date;
 
     public StudentOutputDtoFull (Student student) {
-        setId_student(student.getId_student());
+        /*setId_student(student.getId_student());
 
         setNum_hours_week(student.getNum_hours_week());
         setComents(student.getComents());
-        setBranch(student.getBranch());
+        setBranch(student.getBranch());*/
 
         setId_persona(student.getPersona().getId_persona());
         setUsuario(student.getPersona().getUsuario());

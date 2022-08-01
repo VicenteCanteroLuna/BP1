@@ -1,15 +1,18 @@
 package com.bosonit.BP1.Asignaturas.domain;
 
 import com.bosonit.BP1.Asignaturas.infrastructure.controller.dto.AsignaturaOutputDto;
-import com.bosonit.BP1.Asignaturas.infrastructure.controller.dto.AsignaturasInputDto;
+import com.bosonit.BP1.Asignaturas.infrastructure.controller.dto.AsignaturaInputDto;
 import com.bosonit.BP1.Estudiante.Domain.Student;
 import com.bosonit.BP1.Profesor.domain.Profesor;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 @Entity
 @Data
@@ -43,18 +46,28 @@ public class Asignaturas {
     Date finish_date;
 
 
-    public Asignaturas(AsignaturasInputDto asignaturasInputDto) {
-        setAsignatura(asignaturasInputDto.getAsignatura());
-        setComment(asignaturasInputDto.getComment());
-        setInitial_date(asignaturasInputDto.getInitial_date());
-        setFinish_date(asignaturasInputDto.getFinish_date());
+    @JsonIgnore
+    @ManyToMany
+    @JoinTable(
+            name = "ESTUDIANTES_ASIGNATURAS",
+            joinColumns = @JoinColumn, //(name = "subjectID"),
+            inverseJoinColumns = @JoinColumn //(name = "studentID")
+    )
+    List<Student> estudiantesApuntados = new ArrayList<>();
+
+
+    public Asignaturas(AsignaturaInputDto asignaturaInputDto) {
+        setAsignatura(asignaturaInputDto.getAsignatura());
+        setComment(asignaturaInputDto.getComment());
+        setInitial_date(asignaturaInputDto.getInitial_date());
+        setFinish_date(asignaturaInputDto.getFinish_date());
     }
 
-    public void AsignaturasInputDto(AsignaturasInputDto asignaturasInputDto) {
-        this.setAsignatura(asignaturasInputDto.getAsignatura());
-        this.setComment(asignaturasInputDto.getComment());
-        this.setInitial_date(asignaturasInputDto.getInitial_date());
-        this.setFinish_date(asignaturasInputDto.getFinish_date());
+    public void AsignaturasInputDto(AsignaturaInputDto asignaturaInputDto) {
+        this.setAsignatura(asignaturaInputDto.getAsignatura());
+        this.setComment(asignaturaInputDto.getComment());
+        this.setInitial_date(asignaturaInputDto.getInitial_date());
+        this.setFinish_date(asignaturaInputDto.getFinish_date());
     }
 
     public AsignaturaOutputDto AsignaturaOutputDto(Asignaturas asignaturas) {
@@ -66,6 +79,15 @@ public class Asignaturas {
         asignaturaOutputDto.setFinish_date(this.getFinish_date());
 
         return asignaturaOutputDto;
+    }
+
+
+    public void inscribir(Student student){
+        estudiantesApuntados.add(student);
+    }
+
+    public void apuntarProfesor(Profesor profesor) {
+        this.profesor = profesor;
     }
 
 }

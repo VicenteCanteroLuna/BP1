@@ -1,5 +1,6 @@
 package com.bosonit.BP1.Estudiante.application;
 
+import com.bosonit.BP1.Asignaturas.infrastructure.controller.dto.AsignaturaOutputDto;
 import com.bosonit.BP1.Errores.UnprocesableException;
 import com.bosonit.BP1.Estudiante.Domain.Student;
 import com.bosonit.BP1.Estudiante.infrastructure.controller.dto.StudentInputDto;
@@ -13,7 +14,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
-import java.util.Optional;
 
 @Component
 @AllArgsConstructor
@@ -77,6 +77,11 @@ public class EstudianteServiceImpl implements EstudianteService {
         } catch (Exception e) {
             throw new UnprocesableException("Error");
         }
+    }
+
+    @Override
+    public List<AsignaturaOutputDto> asignaturasEstudiante(int idEstudiante) {
+        return studentRepositoryJpa.findById(idEstudiante).get().getEstudios().stream().map(n -> n.AsignaturaOutputDto(n)).toList();
     }
 }
 

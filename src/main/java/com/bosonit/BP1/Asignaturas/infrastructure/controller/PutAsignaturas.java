@@ -1,13 +1,10 @@
 package com.bosonit.BP1.Asignaturas.infrastructure.controller;
 
 import com.bosonit.BP1.Asignaturas.application.AsignaturasService;
+import com.bosonit.BP1.Asignaturas.infrastructure.controller.dto.AsignaturaInputDto;
 import com.bosonit.BP1.Asignaturas.infrastructure.controller.dto.AsignaturaOutputDto;
-import com.bosonit.BP1.Asignaturas.infrastructure.controller.dto.AsignaturasInputDto;
-import com.bosonit.BP1.Asignaturas.infrastructure.controller.dto.AsignaturasOutputDtoFull;
+import com.bosonit.BP1.Asignaturas.infrastructure.controller.dto.AsignaturaOutputDtoFull;
 import com.bosonit.BP1.Errores.NotFoundException;
-import com.bosonit.BP1.Estudiante.application.EstudianteService;
-import com.bosonit.BP1.Estudiante.infrastructure.controller.dto.StudentInputDto;
-import com.bosonit.BP1.Estudiante.infrastructure.controller.dto.StudentOutputDtoFull;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -22,9 +19,9 @@ public class PutAsignaturas {
 
 
     @RequestMapping(value = "/asignatura/{id}", method = RequestMethod.PUT)
-    ResponseEntity<AsignaturasOutputDtoFull> actualizaAsignatura(@PathVariable("id") int id, @RequestBody AsignaturasInputDto asignaturasInputDto) throws Exception {
+    ResponseEntity<AsignaturaOutputDto> actualizaAsignatura(@PathVariable("id") int id, @RequestBody AsignaturaInputDto asignaturaInputDto) throws Exception {
         try {
-            return new ResponseEntity<>(asignaturasService.actualizaAsignatura(id, asignaturasInputDto), HttpStatus.OK);
+            return new ResponseEntity<>(asignaturasService.actualizaAsignatura(id, asignaturaInputDto), HttpStatus.OK);
         } catch (Exception e) {
             throw new NotFoundException("No existe el id");
         }
