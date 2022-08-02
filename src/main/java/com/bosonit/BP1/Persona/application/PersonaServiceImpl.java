@@ -10,11 +10,13 @@ import com.bosonit.BP1.Persona.infrastructure.controller.dto.output.PersonaOutpu
 import com.bosonit.BP1.Persona.infrastructure.controller.dto.output.PersonaOutputDtoProfesor;
 import com.bosonit.BP1.Persona.infrastructure.controller.dto.output.PersonaOutputDtoStudent;
 import com.bosonit.BP1.Persona.infrastructure.repository.PersonaRepositoryJPA;
+import com.bosonit.BP1.Profesor.infrastructure.controller.dto.ProfesorOutputDto;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
+import org.springframework.web.client.RestTemplate;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -151,4 +153,6 @@ public class PersonaServiceImpl implements PersonaService{
        }
 
     }
+
+
 }
