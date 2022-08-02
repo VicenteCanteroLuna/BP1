@@ -5,18 +5,21 @@ import com.bosonit.BP1.Persona.application.PersonaService;
 import com.bosonit.BP1.Persona.infrastructure.controller.dto.input.PersonaInputDTO;
 import com.bosonit.BP1.Persona.infrastructure.controller.dto.output.PersonaOutputDTO;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
+@CrossOrigin(origins = "*", methods = RequestMethod.POST)
+@RequestMapping("addperson")
 public class PostController {
 
 
     @Autowired
     PersonaService personaService;
 
-    @PostMapping("/persona")
+
+    @PostMapping
     public PersonaOutputDTO addPersona(@RequestBody PersonaInputDTO persInputDto) throws Exception {
         try{
             return personaService.añadir(persInputDto);
@@ -25,5 +28,8 @@ public class PostController {
         }
 
     }
+
+
+
 
 }

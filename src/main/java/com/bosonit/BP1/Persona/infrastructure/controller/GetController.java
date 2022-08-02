@@ -3,23 +3,22 @@ package com.bosonit.BP1.Persona.infrastructure.controller;
 import com.bosonit.BP1.Errores.NotFoundException;
 import com.bosonit.BP1.Persona.application.PersonaService;
 import com.bosonit.BP1.Persona.infrastructure.controller.dto.output.PersonaOutputDTO;
+import com.bosonit.BP1.Profesor.infrastructure.controller.dto.ProfesorOutputDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RestController
+@CrossOrigin(origins = "*", methods = RequestMethod.GET)
 public class GetController {
 
     @Autowired
     PersonaService personaService;
 
 
-    @GetMapping("/persona")
+    @GetMapping("/getall")
     List<PersonaOutputDTO> getAllPersonas(@RequestParam(defaultValue = "simple", required = false) String outputType) throws Exception{
         return personaService.findAll(outputType);
     }
@@ -42,6 +41,7 @@ public class GetController {
             return null;
         }
     }
+
 
 
 }
