@@ -16,6 +16,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.client.RestTemplate;
 
 import java.util.List;
@@ -154,5 +155,12 @@ public class PersonaServiceImpl implements PersonaService{
 
     }
 
-
+    public ResponseEntity<String> personaBorradaPorID(@PathVariable int id) throws Exception {
+        try {
+            personaRepositoryJPA.deleteById(id);
+            return new ResponseEntity<>(("Borrada persona con id: " + id),HttpStatus.OK);
+         } catch (Exception e) {
+            throw new NotFoundException("No existe el id");
+         }
+    }
 }

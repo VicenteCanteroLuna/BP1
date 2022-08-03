@@ -1,6 +1,7 @@
 package com.bosonit.BP1.Estudiante.application;
 
 import com.bosonit.BP1.Asignaturas.infrastructure.controller.dto.AsignaturaOutputDto;
+import com.bosonit.BP1.Errores.NotFoundException;
 import com.bosonit.BP1.Errores.UnprocesableException;
 import com.bosonit.BP1.Estudiante.Domain.Student;
 import com.bosonit.BP1.Estudiante.infrastructure.controller.dto.StudentInputDto;
@@ -11,7 +12,10 @@ import com.bosonit.BP1.Persona.Domain.Persona;
 import com.bosonit.BP1.Persona.infrastructure.repository.PersonaRepositoryJPA;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
+import org.springframework.web.bind.annotation.PathVariable;
 
 import java.util.List;
 
@@ -82,6 +86,15 @@ public class EstudianteServiceImpl implements EstudianteService {
     @Override
     public List<AsignaturaOutputDto> asignaturasEstudiante(int idEstudiante) {
         return studentRepositoryJpa.findById(idEstudiante).get().getEstudios().stream().map(n -> n.AsignaturaOutputDto(n)).toList();
+    }
+
+    public ResponseEntity<String> deleteById(@PathVariable int id)throws Exception{
+        try{
+            studentRepositoryJpa.deleteById(id);
+            return new ResponseEntity<>(("Borrado alumno con id: " + id), HttpStatus.OK);
+        } catch (Exception e) {
+            throw new NotFoundException("No existe el id");
+        }
     }
 }
 

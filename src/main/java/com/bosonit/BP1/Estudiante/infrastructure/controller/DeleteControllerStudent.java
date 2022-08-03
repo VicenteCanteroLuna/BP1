@@ -14,12 +14,13 @@ import org.springframework.web.bind.annotation.RestController;
 public class DeleteControllerStudent {
 
     @Autowired
-    StudentRepositoryJpa studentRepositoryJpa;
+    //StudentRepositoryJpa studentRepositoryJpa;
+    EstudianteService estudianteService;
 
     @DeleteMapping("estudiante/{id}")
     ResponseEntity<String> estudianteBorradoPorId(@PathVariable int id)throws Exception{
         try{
-            studentRepositoryJpa.deleteById(id);
+            estudianteService.deleteById(id);
             return new ResponseEntity<>(("Borrado alumno con id: " + id), HttpStatus.OK);
         } catch (Exception e) {
             throw new NotFoundException("No existe el id");

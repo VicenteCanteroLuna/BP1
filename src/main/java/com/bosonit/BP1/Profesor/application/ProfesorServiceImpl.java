@@ -1,5 +1,6 @@
 package com.bosonit.BP1.Profesor.application;
 
+import com.bosonit.BP1.Errores.NotFoundException;
 import com.bosonit.BP1.Errores.UnprocesableException;
 import com.bosonit.BP1.Estudiante.Domain.Student;
 import com.bosonit.BP1.Estudiante.infrastructure.controller.dto.StudentOutputDtoFull;
@@ -15,8 +16,11 @@ import com.bosonit.BP1.Profesor.infrastructure.controller.dto.ProfesorOutputDtoF
 import com.bosonit.BP1.Profesor.infrastructure.repository.ProfesorRepositoryJpa;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.PathVariable;
 
 import java.util.List;
 
@@ -79,6 +83,15 @@ public class ProfesorServiceImpl implements ProfesorService {
             return new ProfesorOutputDtoFull(profesorEncontrado);
         } catch (Exception e) {
             throw new UnprocesableException("Error");
+        }
+    }
+
+    public ResponseEntity<String> deleteById(@PathVariable int id)throws Exception{
+        try{
+            profesorRepositoryJpa.deleteById(id);
+            return new ResponseEntity<>(("Borrado profesor con id: " + id), HttpStatus.OK);
+        } catch (Exception e) {
+            throw new NotFoundException("No existe el id");
         }
     }
 }

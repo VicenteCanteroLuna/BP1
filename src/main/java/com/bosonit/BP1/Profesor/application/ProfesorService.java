@@ -8,6 +8,7 @@ import com.bosonit.BP1.Persona.infrastructure.controller.dto.output.PersonaOutpu
 import com.bosonit.BP1.Profesor.infrastructure.controller.dto.ProfesorInputDto;
 import com.bosonit.BP1.Profesor.infrastructure.controller.dto.ProfesorOutputDto;
 import com.bosonit.BP1.Profesor.infrastructure.controller.dto.ProfesorOutputDtoFull;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -22,4 +23,6 @@ public interface ProfesorService {
     List<ProfesorOutputDtoFull> dameProfesores();
 
     ProfesorOutputDtoFull actualizaProfesor(int id, ProfesorInputDto profesorInputDto);
+
+    ResponseEntity<String> deleteById(int id) throws Exception;
 }
